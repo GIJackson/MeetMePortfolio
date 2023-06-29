@@ -5,7 +5,6 @@ I expect my project to be a website that hosts various information about myself,
 What work I need to do includes, but is not limited to: -Develop or copy a regex that identifies dates that could be misinterpreted i.e. 6/9/2023 could also be 9/6/2023 when read as purely numbers. -Develop a script (like a play script) to follow as the interactable portion of my website. For example, a picture of me pops up and asks for the user's name, and if the person gives obviously not a name, responds accordingly. -Understand a utilize API to pull real time information about the weather and air quality, as it's important for my comfort due to my severe allergies.
 
 Project Features
-* Please choose from the list of features provided in the Project Requirements document.
 
 * Use a regular expression to validate user input and either prevent the invalid input or inform the user about it
 
