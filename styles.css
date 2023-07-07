@@ -20,6 +20,11 @@ section {
     display: flex;
 }
 
+#navbar {
+    background-color: #2aa562;
+    color: #fff;
+}
+
 nav ul {
     display: flex;
     flex-direction: row;
