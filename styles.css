@@ -11,7 +11,10 @@ body {
     margin: 0px;
     display: flexbox;
     background-color: rgb(75, 199, 75);
-  
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
 main {
@@ -26,7 +29,7 @@ main {
     box-sizing: border-box;
   }
 
-section {
+.MePicture {
     display: flex;
     background-image: url("WoahCat_hang_niu.jpg");
     width: auto;
@@ -37,6 +40,13 @@ section {
     box-shadow: 1px 2px 3px rgba(0,0,0,.5);
     border-color: #C74BC7;
     border-style: solid;
+}
+
+.UserQuestions {
+    display: flex;
+    overflow-y: scroll;
+    flex-direction: column;
+    height: 125px;
 }
 
 #navbar {
@@ -92,4 +102,26 @@ input[name="chk2"] + span {
 form label {
     display: block;
     padding-bottom: 10px;
+}
+
+button {
+    padding: 12px 20px;
+    margin: 12px 20px;
+    font-size: 16px;
+    box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+    width: auto;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer; /*Not neccessary on mobile view, move to media queries*/
+    transition: opacity 1s ease; 
+}
+
+button.hidden {
+    opacity: 0; 
+}
+
+.EmptySpace {
+    content: "Undo";
+    background-color: #3395FF;
 }
