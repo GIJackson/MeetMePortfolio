@@ -15,14 +15,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     hideListItems();
-
-    // Deactivate hideListItems function when a navbar link is clicked
-    var navbarLinks = navbar.querySelectorAll('a');
-    navbarLinks.forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            // Stop or deactivate the hideListItems functionality here
-            console.log('hideListItems deactivated');
-        });
-    });
+    
 });
