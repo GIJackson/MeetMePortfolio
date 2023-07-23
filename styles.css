@@ -2,68 +2,44 @@ html {
     font-family: sans-serif;
   }
 
-  header {
-    box-shadow: 1px 2px 3px rgba(0,0,0,.5);
-    
-}
-  
 body {
-    margin: 0px;
-    display: flexbox;
-    background-color: rgb(75, 199, 75);
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(136, 226, 136);
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    margin: 0px;
 }
 
-main {
-    display: flexbox;
-    margin: 10px;
-    height: 750px;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-.MePicture {
-    display: flex;
-    background-image: url("WoahCat_hang_niu.jpg");
-    width: auto;
-    height: auto;
-    max-width: none;
-    background-size: cover;
-    border-radius: 15px;
+header {
     box-shadow: 1px 2px 3px rgba(0,0,0,.5);
-    border-color: #C74BC7;
-    border-style: solid;
-}
-
-.UserQuestions {
     display: flex;
-    overflow-y: scroll;
-    flex-direction: column;
-    height: 125px;
+    justify-content: end;
+    width: 100%;
+    position: fixed;
+    top: 0;
 }
-
-#navbar {
+  
+nav {
     background-color: #2aa562;
-    color: #fff;
+    display: flex;
+    justify-content: end;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 100%;
+    
 }
 
 nav ul {
     display: flex;
-    flex-direction: row;
-    justify-content: end;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-nav ul li {
-    display: flex;
-    margin-right: 10px;
+nav ul li{
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 nav ul li a {
@@ -71,50 +47,76 @@ nav ul li a {
     color: #333;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+}
+
+.MePicture {
+    display: flex;
+    background-image: url("WoahCat_hang_niu.jpg");
+    background-size: cover;
+    border-radius: 15px;
+    box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+    border-color: #C74BC7;
+    border-style: solid;
+    margin: 20px 10px 10px 10px;
+}
+
 img {
     width: 100%; 
-    height: 100%;
+    height: auto;
     max-width: none;
     background-size: cover;
     border-radius: 15px;
     box-shadow: 1px 2px 3px rgba(0,0,0,.5);
 }
 
-form {
-    display: flexbox;
-    padding: 10px;
-    margin: 10px;
-    height: 125px;
-    overflow-y: auto;
-    border: 2px #e98181 solid;
-  }
-  
-input[type="checkbox"] + span {
-    font-weight: bold;
-    font-style: italic;
-    color: blue;
+
+.UserQuestions {
+    display: flex;
+    overflow-y: hidden;
+    flex-direction: column;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
-  
-input[name="chk2"] + span {
-    color: red;
+
+.UserQuestions h1 {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    color: white;
+    background: rgba(250, 242, 242, 0.5);
+    font-family: Arial, Helvetica;
+    font-size: 20px;
+    text-shadow:
+        0.07em 0 black,
+        0 0.07em black,
+        -0.07em 0 black,
+        0 -0.07em black;
+    text-align: justify;
+    border-width: 1px;
+    border: solid 3px black;
+    border-radius: 15px;
 }
-  
-form label {
-    display: block;
-    padding-bottom: 10px;
+
+.UserQuestions h1#text {
+    opacity: 1;
 }
 
 button {
-    padding: 12px 20px;
-    margin: 12px 20px;
     font-size: 16px;
     box-shadow: 1px 2px 3px rgba(0,0,0,.5);
-    width: auto;
     background-color: #007bff;
     color: #fff;
     border: none;
     cursor: pointer; /*Not neccessary on mobile view, move to media queries*/
     transition: opacity 1s ease; 
+    width: 100%;
+    margin-bottom: 5px;
 }
 
 button.hidden {
