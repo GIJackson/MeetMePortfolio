@@ -74,7 +74,7 @@ img {
 }
 
 
-.UserQuestions {
+#UserQuestions {
     display: flex;
     overflow-y: hidden;
     flex-direction: column;
@@ -82,9 +82,11 @@ img {
     position: fixed;
     bottom: 0;
     width: 100%;
+    height: auto;
+    overflow-y: hidden;
 }
 
-.UserQuestions h1 {
+#UserQuestions h1 {
     display: flex;
     justify-content: center;
     padding: 5px;
@@ -101,9 +103,10 @@ img {
     border-width: 1px;
     border: solid 3px black;
     border-radius: 15px;
+    
 }
 
-.UserQuestions h1#text {
+#UserQuestions h1#text {
     opacity: 1;
 }
 
@@ -116,7 +119,7 @@ button {
     cursor: pointer; /*Not neccessary on mobile view, move to media queries*/
     transition: opacity 1s ease; 
     width: 100%;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 button.hidden {
