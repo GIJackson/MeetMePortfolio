@@ -17,6 +17,13 @@ document.addEventListener('DOMContentLoaded', function() {
     hideListItems();
 });
 
+document.addEventListener('DOMContentLoaded', meTalkingContent());
+
+function meTalkingContent(){
+    let meTalking = document.getElementById('MeTalking');
+    meTalking.textContent = "Hello!";
+};
+
 const userQuestionsArray = [ "How old are you?", "User question two.", "User question three.", "User question four.", "User question five." ]
 
 let removedButton = [];
@@ -93,14 +100,24 @@ function handleButtonClick(event) {
             targetButton.remove();
             removeAllButtonsWithClass("ClickedButton");
             removedButton = [];
-            removedButtons = [];},
+            removedButtons = [];
+            meTalkingContent();},
             1000);
+            
         observeNewButtons();
     }
 
     if (targetButton.className === 'fadeButton')
     {
         fadeTheFadeButtons(targetButton);
+        setTimeout(function(){
+            if (removedButton[0] === removedButtons[0]) {
+                let meTalking = document.getElementById("MeTalking");
+                let today = new Date();
+                const myBirthday = new Date('06-27-1995');
+                const differenceInYears = today.getFullYear() - myBirthday.getFullYear();
+                meTalking.textContent = 'I am ' + differenceInYears + ' years old! How old are you?';
+        }}, 1000)
     };
 };
 
