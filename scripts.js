@@ -24,7 +24,7 @@ function meTalkingContent(){
     meTalking.textContent = "Hello!";
 };
 
-const userQuestionsArray = [ "How old are you?", "User question two.", "User question three.", "User question four.", "User question five." ]
+const userQuestionsArray = [ "How old are you?", "Do something cool.", "User question three.", "User question four.", "User question five." ]
 
 let removedButton = [];
 let removedButtons = [];
@@ -49,6 +49,59 @@ function generateUserQuestions() {
     observeNewButtons()
 }
 
+function validateIsNumber(input) {
+    const numberRegex = /^[0-9]+$/;
+    if (!numberRegex.test(input)) {
+        return false;
+    }
+    else {
+        return true;
+    }
+};
+
+function validateNumberLow(input){
+    const numberValue = parseInt(input, 10);
+    return numberValue >= 1;
+};
+
+function validateNumberHigh(input){
+    const numberValue = parseInt(input, 10);
+    return numberValue <= 105;
+};
+
+function createInputFieldWithValidation() {
+    const sectionElement = document.getElementById('UserQuestions');
+    const inputField = document.createElement('input');
+    sectionElement.appendChild(inputField);
+    inputField.type = 'text';
+    inputField.id = 'HowOldAreYou';
+
+    inputField.addEventListener('keyup', function(event) {
+      if (event.key === 'Enter') {
+        const userInput = inputField.value.trim();
+        const numberHigh = validateNumberHigh(userInput);
+        const numberLow = validateNumberLow(userInput);
+        if (userInput === '') {
+          alert('Please enter valid information.');
+        }
+        if (validateIsNumber(userInput)) { 
+            if (numberLow){
+                if (numberHigh){
+                    alert(`Wow! You\'re ${userInput} years old? That's cool!`);
+                    } else {
+                        alert(`There\'s no way you\'re ${userInput} years old. Try again!`);
+                    }
+                } else {
+                    alert(`Not possible. Try again!`);
+                }
+            } else {
+                alert(`I don\'t think that\'s a number. Try again!`)
+            }
+            inputField.value = '';
+        }
+    });
+}; //Current limitation: can't deal with word number mixes ex. "Twenty 1" is unrecognizable.
+  
 document.addEventListener('DOMContentLoaded', generateUserQuestions)
 
 function fadeTheFadeButtons (targetButton) {
@@ -56,7 +109,7 @@ function fadeTheFadeButtons (targetButton) {
     setTimeout(function() {
         var emptySpace = document.createElement('button');
         emptySpace.className = 'EmptySpace';
-        var textNode = document.createTextNode('Undo');
+        var textNode = document.createTextNode('Go Back');
         emptySpace.appendChild(textNode);
         removedButton.push(targetButton.textContent);
         targetButton.parentNode.insertBefore(emptySpace, targetButton);
@@ -91,18 +144,21 @@ function handleButtonClick(event) {
     const targetButton = event.target;
 
     if (targetButton.className === 'EmptySpace') {
-        
+        const deleteElement = document.getElementById('HowOldAreYou');
         targetButton.classList.add('hidden');
         setTimeout(function() {
             for(let i=0; i < removedButtons.length; i++){
                 var undoButtons = createAndAppendElementToSection('UserQuestions','button', removedButtons[i]);
                 undoButtons.className = 'fadeButton';};
             targetButton.remove();
+            if(deleteElement != null){
+                deleteElement.remove();
+            }
             removeAllButtonsWithClass("ClickedButton");
             removedButton = [];
             removedButtons = [];
-            meTalkingContent();},
-            1000);
+            meTalkingContent();
+        },1000);
             
         observeNewButtons();
     }
@@ -117,7 +173,10 @@ function handleButtonClick(event) {
                 const myBirthday = new Date('06-27-1995');
                 const differenceInYears = today.getFullYear() - myBirthday.getFullYear();
                 meTalking.textContent = 'I am ' + differenceInYears + ' years old! How old are you?';
-        }}, 1000)
+                createInputFieldWithValidation();
+            }  
+             
+        }, 1000)
     };
 };
 
@@ -138,4 +197,5 @@ const observer = new MutationObserver(function(mutationsList, observer) {
 });
 observer.observe(buttonContainer, { childList: true });
 };
+
   
