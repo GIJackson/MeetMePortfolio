@@ -24,7 +24,7 @@ function meTalkingContent(){
     meTalking.textContent = "Hello!";
 };
 
-const userQuestionsArray = [ "How old are you?", "Do something cool.", "User question three.", "User question four.", "User question five." ]
+const userQuestionsArray = [ "How old are you?", "Do something cool.", "Tell me about yourself.", "User question four.", "User question five." ]
 
 let removedButton = [];
 let removedButtons = [];
@@ -74,7 +74,7 @@ function createInputFieldWithValidation() {
     const inputField = document.createElement('input');
     sectionElement.appendChild(inputField);
     inputField.type = 'text';
-    inputField.id = 'HowOldAreYou';
+    inputField.id = 'InputField';
 
     inputField.addEventListener('keyup', function(event) {
       if (event.key === 'Enter') {
@@ -101,7 +101,23 @@ function createInputFieldWithValidation() {
         }
     });
 }; //Current limitation: can't deal with word number mixes ex. "Twenty 1" is unrecognizable.
-  
+
+function createInputFieldForCounting() {
+    const sectionElement = document.getElementById('UserQuestions');
+    const inputField = document.createElement('input');
+    sectionElement.appendChild(inputField);
+    inputField.type = 'text';
+    inputField.id = 'InputField';
+
+    inputField.addEventListener('keyup', function(event) {
+      if (event.key === 'Enter') {
+        const userInputTotal = inputField.value.length;
+          alert(`That adds up to ${userInputTotal} characters!`);
+          inputField.value = '';
+        }
+    })
+};
+
 document.addEventListener('DOMContentLoaded', generateUserQuestions)
 
 function fadeTheFadeButtons (targetButton) {
@@ -144,15 +160,21 @@ function handleButtonClick(event) {
     const targetButton = event.target;
 
     if (targetButton.className === 'EmptySpace') {
-        const deleteElement = document.getElementById('HowOldAreYou');
+        const deleteElement = document.getElementById('InputField');
+        const deleteWeather = document.getElementById('weather');
         targetButton.classList.add('hidden');
         setTimeout(function() {
             for(let i=0; i < removedButtons.length; i++){
                 var undoButtons = createAndAppendElementToSection('UserQuestions','button', removedButtons[i]);
                 undoButtons.className = 'fadeButton';};
             targetButton.remove();
+
             if(deleteElement != null){
                 deleteElement.remove();
+            }
+            
+            if(deleteWeather != null){
+                deleteWeather.remove();
             }
             removeAllButtonsWithClass("ClickedButton");
             removedButton = [];
@@ -166,19 +188,35 @@ function handleButtonClick(event) {
     if (targetButton.className === 'fadeButton')
     {
         fadeTheFadeButtons(targetButton);
+        let meTalking = document.getElementById("MeTalking");
         setTimeout(function(){
             if (removedButton[0] === removedButtons[0]) {
-                let meTalking = document.getElementById("MeTalking");
                 let today = new Date();
                 const myBirthday = new Date('06-27-1995');
                 const differenceInYears = today.getFullYear() - myBirthday.getFullYear();
                 meTalking.textContent = 'I am ' + differenceInYears + ' years old! How old are you?';
                 createInputFieldWithValidation();
-            }  
+            }
+            if (removedButton[0] === removedButtons[1]){
+                createInputFieldForCounting()
+                meTalking.textContent = 'Okay! Type up something for me to look at.'
+            }
+            if (removedButton[0] === removedButtons[2]){
+                const section1 = document.getElementById('MePicture');
+                const section3 = document.getElementById('UserQuestions');
+                const newSectionHTML = '<section id="weather"></section>'
+                section1.insertAdjacentHTML('afterbegin', newSectionHTML);getWeatherData()
+                .then((data) => {
+                    updateWeatherInfo(data);
+                });
+            }
+            
              
         }, 1000)
     };
 };
+
+
 
 function observeNewButtons() {
 
@@ -198,4 +236,36 @@ const observer = new MutationObserver(function(mutationsList, observer) {
 observer.observe(buttonContainer, { childList: true });
 };
 
-  
+const apiKey = 'jDZWAZRAbDAyL4FVN56JTMlxxqGDNzl0';
+const locationKey = '333278';
+
+async function getWeatherData() {
+    try {
+        const response = await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${apiKey}&details=true`);
+        const data = await response.json();
+        return data[0];
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+    }
+}
+
+function updateWeatherInfo(weatherData) {
+    const weatherContainer = document.getElementById('weather');
+    const weatherInfo = `
+        <h2>${weatherData.WeatherText}</h2>
+        <p>Temp: ${weatherData.Temperature.Imperial.Value}°F</p>
+        <p>Humidity: ${weatherData.RelativeHumidity}%</p>
+    `;
+    let meTalking = document.getElementById("MeTalking");
+    let temp = weatherData.Temperature.Imperial.Value
+    const myComfort =
+    temp < 32
+      ? "Shooey, that\'s too cold for me!"
+      : temp < 70
+      ? "I just need to put something on."
+      : temp <= 85
+      ? "Ahh. This is just right for me."
+      : "Y\'owch that\'s too hot for me!";
+      meTalking.textContent = myComfort
+    weatherContainer.innerHTML += weatherInfo;
+}

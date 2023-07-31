@@ -53,8 +53,9 @@ main {
     max-height: 100%;
 }
 
-.MePicture {
+#MePicture {
     display: flex;
+    flex-direction: column;
     background-image: url("WoahCat_hang_niu.jpg");
     background-size: cover;
     border-radius: 15px;
@@ -66,6 +67,7 @@ main {
 
 img {
     width: 100%; 
+    z-index: -1;
     height: auto;
     max-width: none;
     background-size: cover;
@@ -129,4 +131,39 @@ button.hidden {
 .EmptySpace {
     content: "Undo";
     background-color: #3395FF;
+}
+
+.weather-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+#weather {
+    display: flex;
+    flex-direction: row;
+    position: fixed; 
+    background-color: #ffcccc;
+    padding: 20px;
+    margin: 20px;
+    z-index: 1;
+    opacity: 0.75;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    left: 0px;
+}
+
+#weather h2#text{
+    padding: 10px;
+    opacity: 1;
+}
+
+#weather > p {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    flex-wrap: nowrap;
 }

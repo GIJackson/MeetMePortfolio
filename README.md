@@ -6,10 +6,10 @@ What work I need to do includes, but is not limited to: -Develop or copy a regex
 
 Project Features
 
-* Use a regular expression to validate user input and either prevent the invalid input or inform the user about it
+* Use a regular expression to validate user input and either prevent the invalid input or inform the user about it. *Implemented when user is giving age*
 
-* Analyze text and display useful information about it. (e.g. word/character count in an input field)
+* Analyze text and display useful information about it. (e.g. word/character count in an input field) *Implemented when user asks for me to do something cool.*
 
-* Retrieve data from a third-party API and use it to display something within your app.
+* Retrieve data from a third-party API and use it to display something within your app. *Implemented when user asks for something about myself*
 
-* Convert user input between two formats and display the result. (e.g. Fahrenheit to Celcius, kilograms to pounds, etc)
+* Convert user input between two formats and display the result. (e.g. Fahrenheit to Celcius, kilograms to pounds, etc) *Optional, not implemented yet*
